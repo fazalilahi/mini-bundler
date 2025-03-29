@@ -1,0 +1,30 @@
+{
+  "name": "vanilla-minipack",
+  "version": "1.0.0",
+  "description": "To understand modern module bundlers in javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fazalilahi/mini-bundler.git"
+  },
+  "keywords": [
+    "bundler",
+    "webpack",
+    "parcel",
+    "rollup"
+  ],
+  "author": "fazalilahi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fazalilahi/mini-bundler/issues"
+  },
+  "homepage": "https://github.com/fazalilahi/mini-bundler#readme",
+  "dependencies": {
+    "@babel/core": "7.26.10",
+    "@babel/parser": "7.27.0",
+    "@babel/traverse": "7.27.0"
+  }
+}
