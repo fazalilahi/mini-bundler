@@ -19,7 +19,6 @@ function transformFile(filePath) {
             sourceType: 'module',
             plugins: [
                 'js',
-                'typescript',
             ]
         });
     
@@ -31,7 +30,9 @@ function transformFile(filePath) {
             },
         })
         const { code } = transformFromAstSync(astExplorer, file, {
-            presets: ['@babel/preset-env'],
+            presets: [
+                '@babel/preset-env',
+            ],
         });
 
         const id = ID++;
@@ -111,7 +112,7 @@ async function build() {
         await fs.promises.writeFile('dist/bundle.js', result);    
         // console.log(result)
         console.log('Bundle successfully created!');
-        console.log('Output: dist/bundle.js (' + (result.length/1024).toFixed(2) + 'KB)');
+        console.log('Output: dist/bundle.js (' + (result.length/1024).toFixed(2) + 'KB) ✨');
     } catch (error) {
         console.error('Failed to create bundle: ', error)
     }
