@@ -5,9 +5,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const parser = require('@babel/parser');
-// const { transformFromAstSync } = require('@babel/core')
-const traverse = require('@babel/traverse')
+const { parse } = require('@babel/parser');
+const { transformFromAstSync } = require('@babel/core')
+const { default: traverse } = require('@babel/traverse')
 
 let ID = 0
 function composeFile(filePath) {
@@ -15,7 +15,7 @@ function composeFile(filePath) {
 
         const file = fs.readFileSync(filePath, 'utf8');
         // checkout https://astexplorer.net for tree formatting
-        const astExplorer = parser.parse(file, {
+        const astExplorer = parse(file, {
             sourceType: 'module',
             plugins: [
                 'js',
@@ -25,17 +25,21 @@ function composeFile(filePath) {
     
         const dependenciesList = new Set();
 
-        traverse.default(astExplorer, {
+        traverse(astExplorer, {
             ImportDeclaration: ({ node }) => {
                 dependenciesList.add(node.source.value);
             },
         })
+        const { code } = transformFromAstSync(astExplorer, file, {
+            presets: ['@babel/preset-env'],
+        });
+
         const id = ID++;
         return {
             id,
             filePath,
             dependencies: Array.from(dependenciesList),
-            // code,
+            code,
         }
     } catch (error) {
         console.error('Failed to compose file: ', error)
