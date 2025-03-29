@@ -1,2 +1,2 @@
 const capitalize = (text) => text.toUpperCase()
-export default capitalize;
+export { capitalize };
